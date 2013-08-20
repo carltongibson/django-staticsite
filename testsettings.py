@@ -8,3 +8,6 @@ DATABASES = {
 INSTALLED_APPS = (
     'staticsite',
 )
+
+
+SECRET_KEY = '12345'

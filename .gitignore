@@ -1,3 +1,4 @@
+*.bbprojectd
 *.pyc
 MANIFEST
 dist/
