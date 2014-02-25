@@ -7,6 +7,10 @@ from django.conf import settings
 from django.template import Template, Context
 from django.template.loader import get_template
 
+
+from staticsite.views import CONTEXT_MAP
+
+
 ### Notes
 #   Expects `staticsite` folder to exist in `settings.TEMPLATE_DIRS`
 #       This COULD use Template Loaders.
@@ -16,6 +20,7 @@ from django.template.loader import get_template
 #
 #   TODO: Set STATIC_URL context variable from settings.
 #   TODO: Render the view here. (Take advantage of get_context_data)
+#       — Test that output is correct.
 #   TODO: Cache templates so we only write changed files.
 #           - c.p. django.contrib.staticfiles collectstatic
 class Command(BaseCommand):
@@ -36,7 +41,15 @@ class Command(BaseCommand):
                     print "Loading template at: %s" % template_path
 
                     t = get_template(template_path)
-                    html = t.render(Context({'STATIC_URL':'/static/'}))
+
+                    # Get context.
+                    context = {'STATIC_URL':'/static/'}
+
+                    context_map_key = template_path.replace(staticsite_dir, '').lstrip('/')
+                    if CONTEXT_MAP.has_key(context_map_key):
+                        context.update(CONTEXT_MAP[context_map_key])
+
+                    html = t.render(Context(context))
 
                     # and write
                     write_dir = dirpath.replace(staticsite_dir, output_dir, 1)
