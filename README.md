@@ -71,6 +71,17 @@ Notes:
 
 I'd like to be able to enable Django staticsite in production too — that way we could serve the static file if it already existed and generate it — whilst writing it to the filesystem for next time — if not. If you know how to do this without breaking APPEND_SLASHES [please open an issue](https://github.com/carltongibson/django-staticsite/issues/new).
 
+## Per-URL Contexts ##
+
+To enable per-URL contexts define a `STATICSITE_CONTEXT_HELPER_MODULE` setting. If defined, the referenced
+module must exist and must expose a `context_map` attribute.
+
+`context_map` must be a dictionary-like object mapping URL path fragments — such as `index.html` to a context
+dictionary that will be passed to the template for rendering.
+
+The `STATICSITE_CONTEXT_HELPER_MODULE` may employ _Any Means™_ to generate the `context_map`.
+
+
 ##Deployment/Production##
 
 As part of your deployment script run the management command to build the static site:
@@ -116,6 +127,12 @@ To run the tests against the current environment:
 
 Changelog
 =========
+
+0.2.0
+-----
+
+* Added option to use per-URL context map.
+
 
 0.1.0
 -----
