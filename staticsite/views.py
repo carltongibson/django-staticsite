@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 from django.http import Http404
 from django.template import loader, TemplateDoesNotExist
 from django.conf import settings
-from django.utils.importlib import import_module
+from importlib import import_module
 
 def get_context_map(settings):
     try:
