@@ -90,7 +90,7 @@ As part of your deployment script run the management command to build the static
 
 This will write the site to the path you specified in the `STATICSITE_OUTPUT_DIR` setting.
 
-Beyond that you need to configure your web server to server the static site files if they exist and proxy everything else back to Django.
+Beyond that you need to configure your web server to serve the static site files if they exist and proxy everything else back to Django.
 
 An example of this for Nginx might look like:
 
