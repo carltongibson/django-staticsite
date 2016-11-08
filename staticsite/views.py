@@ -59,7 +59,7 @@ class StaticSiteTemplateView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(StaticSiteTemplateView, self).get_context_data(**kwargs)
 
-        if CONTEXT_MAP.has_key(self.normalised_url()):
+        if self.normalised_url() in CONTEXT_MAP:
             context.update(CONTEXT_MAP[self.normalised_url()])
 
         return context
