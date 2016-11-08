@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 import codecs
+from itertools import chain
 
 from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
@@ -38,7 +39,7 @@ class Command(BaseCommand):
 
                     # get template and render
                     template_path = os.path.join(dirpath, name)
-                    print "Loading template at: %s" % template_path
+                    print("Loading template at: %s" % template_path)
 
                     t = get_template(template_path)
 
@@ -46,7 +47,7 @@ class Command(BaseCommand):
                     context = {'STATIC_URL':'/static/'}
 
                     context_map_key = template_path.replace(staticsite_dir, '').lstrip('/')
-                    if CONTEXT_MAP.has_key(context_map_key):
+                    if context_map_key in CONTEXT_MAP:
                         context.update(CONTEXT_MAP[context_map_key])
 
                     html = t.render(Context(context))
@@ -61,11 +62,12 @@ class Command(BaseCommand):
                     write_file.write(html)
                     write_file.close()
 
-                    print "Wrote: %s" % write_path
+                    print("Wrote: %s" % write_path)
 
 
     def _staticsite_dir(self):
-        for template_dir in settings.TEMPLATE_DIRS:
+        dirs = chain.from_iterable(i["DIRS"] for i in settings.TEMPLATES)
+        for template_dir in dirs:
             for path in os.listdir(template_dir):
                 if path == 'staticsite':
                     staticsite_dir = os.path.join(template_dir, path)
