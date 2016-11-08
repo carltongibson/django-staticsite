@@ -1,18 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 from setuptools import setup
 import re
 import os
 import sys
-
 
 name = 'django-staticsite'
 package = 'staticsite'
 description = 'Django static site generator for DEBUG and production.'
 url = 'https://github.com/carltongibson/django-staticsite'
 author = 'Carlton Gibson'
-author_email = 'carlton.gibson@noumenal.co.uk'
+author_email = 'carlton.gibson@noumenal.es'
 license = 'BSD'
 install_requires = []
 
@@ -68,5 +66,9 @@ setup(
     author_email=author_email,
     packages=get_packages(package),
     package_data=get_package_data(package),
-    install_requires=install_requires
+    install_requires=install_requires,
+    entry_points="""
+            [console_scripts]
+            startstaticsite=bin.startstaticsite:start_staticsite
+        """,
 )
