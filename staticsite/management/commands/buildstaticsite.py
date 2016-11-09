@@ -5,7 +5,7 @@ from itertools import chain
 
 from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
-from django.template import Template, Context
+from django.template import Template
 from django.template.loader import get_template
 
 
@@ -44,13 +44,16 @@ class Command(BaseCommand):
                     t = get_template(template_path)
 
                     # Get context.
-                    context = {'STATIC_URL':'/static/'}
+                    context = {
+                        'STATIC_URL': '/static/',
+                        'csrf_token': 'NOTPROVIDED',
+                    }
 
                     context_map_key = template_path.replace(staticsite_dir, '').lstrip('/')
                     if context_map_key in CONTEXT_MAP:
                         context.update(CONTEXT_MAP[context_map_key])
 
-                    html = t.render(Context(context))
+                    html = t.render(context)
 
                     # and write
                     write_dir = dirpath.replace(staticsite_dir, output_dir, 1)
