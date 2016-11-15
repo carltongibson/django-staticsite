@@ -128,6 +128,13 @@ To run the tests against the current environment:
 Changelog
 =========
 
+1.0.0
+-----
+
+* Update for Python 3 & Django 1.10 compatibility
+* Add `startstaticsite` command.
+
+
 0.2.0
 -----
 
