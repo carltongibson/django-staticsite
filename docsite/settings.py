@@ -18,7 +18,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 STATICSITE_OUTPUT_DIR = os.path.join(os.path.dirname(BASE_DIR), 'gh-pages')
 
-STATIC_URL = '/static/'
+STATIC_URL = '/django-staticsite/static/'
 STATIC_ROOT = os.path.join(STATICSITE_OUTPUT_DIR, 'static')
 
 STATICFILES_DIRS = [
