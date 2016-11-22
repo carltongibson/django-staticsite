@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+	<title>Django Staticsite Quickstart</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container">
+    
+
+
+
+<h1>Quickstart</h1>
+
+<p class="lead">Not a developer?
+<br />Staticsite isn't quite ready for you to set up yourself.
+<br /><a href="mailto:support@noumenal.es?subject=Django Staticsite Support">Email Us</a> and we'll help you get set up.
+</p>
+
+<hr />
+
+<h2>Developer Instructions</h2>
+
+<p>Assuming you're comfortable with a terminal shell this will get you started:</p>
+
+<pre><code class="bash"># Somewhere to work...
+mkdir ~/website &amp;&amp; cd ~/website
+
+# ...and a virtualenv
+python -m venv staticsite_env
+staticsite_env/bin/activate
+
+# Install Django &amp; Staticsite
+pip install Django django-staticsite
+
+# Begin project
+startstaticsite my_site
+
+# Run development server to preview
+cd my_site
+python manage.py runserver
+
+# View in Browser
+open http://127.0.0.1:8000
+
+# Make your edits here
+
+# When you're happy...
+python manage.py buildstaticsite
+python manage.py collectstatic
+
+# See your site, ready for rsync...
+tree build
+
+</code></pre>
+
+
+
+
+
+
+    </div>
+  </body>
+</html>
