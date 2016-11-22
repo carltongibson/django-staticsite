@@ -1,0 +1,57 @@
+{% extends 'layouts/base.html' %}
+
+
+{% block title %}Django Staticsite Quickstart{% endblock title %}
+
+
+{% block main_content %}
+
+
+
+<h1>Quickstart</h1>
+
+{% include "includes/not-a-developer.html" %}
+
+<hr />
+
+<h2>Developer Instructions</h2>
+
+<p>Assuming you're comfortable with a terminal shell this will get you started:</p>
+
+<pre><code class="bash"># Somewhere to work...
+mkdir ~/website &amp;&amp; cd ~/website
+
+# ...and a virtualenv
+python -m venv staticsite_env
+staticsite_env/bin/activate
+
+# Install Django &amp; Staticsite
+pip install Django django-staticsite
+
+# Begin project
+startstaticsite my_site
+
+# Run development server to preview
+cd my_site
+python manage.py runserver
+
+# View in Browser
+open http://127.0.0.1:8000
+
+# Make your edits here
+
+# When you're happy...
+python manage.py buildstaticsite
+python manage.py collectstatic
+
+# See your site, ready for rsync...
+tree build
+
+</code></pre>
+
+
+
+
+
+{% endblock %}
+
