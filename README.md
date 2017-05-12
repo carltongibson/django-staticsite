@@ -128,6 +128,13 @@ To run the tests against the current environment:
 Changelog
 =========
 
+1.1.0
+-----
+
+* Pass a fake request during `buildstaticsite`, to allow templates assess to
+  `request.path` (which is reasonable even from a static context).
+
+
 1.0.0
 -----
 

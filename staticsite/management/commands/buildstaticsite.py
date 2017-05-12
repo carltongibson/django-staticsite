@@ -7,7 +7,7 @@ from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
 from django.template import Template
 from django.template.loader import get_template
-
+from django.test import RequestFactory
 
 from staticsite.views import CONTEXT_MAP
 
@@ -30,6 +30,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         staticsite_dir = self._staticsite_dir()
         output_dir = settings.STATICSITE_OUTPUT_DIR
+        factory = RequestFactory()
 
         for dirpath, subdirs, filenames in os.walk(staticsite_dir):
                 for name in filenames:
@@ -39,14 +40,18 @@ class Command(BaseCommand):
 
                     # get template and render
                     template_path = os.path.join(dirpath, name)
-                    print("Loading template at: %s" % template_path)
+                    request_path = "/" + os.path.relpath(template_path, staticsite_dir)
+                    print("Loading template at: %s with request_path: %s" % (template_path, request_path))
 
                     t = get_template(template_path)
 
                     # Get context.
+                    request = factory.get(request_path)
+
                     context = {
                         'STATIC_URL': '/static/',
                         'csrf_token': 'NOTPROVIDED',
+                        'request': request,
                     }
 
                     context_map_key = template_path.replace(staticsite_dir, '').lstrip('/')
